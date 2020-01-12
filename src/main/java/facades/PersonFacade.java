@@ -5,32 +5,27 @@
  */
 package facades;
 
-import dtomappers.FlightDTO;
-import entities.Flight;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import dtomappers.PersonDTO;
+import entities.Person;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
  * @author jelle
  */
-public class FlightFacade implements IFlightFacade {
+public class PersonFacade implements IPersonFacade {
     
-    private static FlightFacade instance;
+    private static PersonFacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private FlightFacade() {}
+    private PersonFacade() {}
     
      private EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -42,67 +37,63 @@ public class FlightFacade implements IFlightFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-         public static FlightFacade getFlightFacade(EntityManagerFactory _emf) {
+         public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new FlightFacade();
+            instance = new PersonFacade();
         }
         return instance;
     }
      
     @Override
-    public List<FlightDTO> getAllFlights(){
+    public List<PersonDTO> getAllPersons(){
         EntityManager em = getEntityManager();
-        List<FlightDTO> flightDTOs = new ArrayList<FlightDTO>();
+        List<PersonDTO> personDTOs = new ArrayList<PersonDTO>();
         try{
-        //Date dateString = new Date(departureDate.toString());
         
-            TypedQuery<Flight> query = em.createQuery("SELECT f FROM Flights f", Flight.class);
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
 
-            List<Flight> flights = query.getResultList();
+            List<Person> persons = query.getResultList();
             
-            for (int i = 0; i < flights.size(); i++) {
-                flightDTOs.add(new FlightDTO(flights.get(i)));
+            for (int i = 0; i < persons.size(); i++) {
+                personDTOs.add(new PersonDTO(persons.get(i)));
                 
             }
             
-            return flightDTOs;
-        } catch (ParseException ex) {
-            Logger.getLogger(FlightFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return personDTOs;
         }finally{
             em.close();
         }
-        return flightDTOs;
     }
-     
+     /*
     @Override
-    public List<FlightDTO> getFlightBySearch(String departure, String destination, Date departureDate) {
+    public List<PersonDTO> getFlightBySearch(String departure, String destination, Date departureDate) {
         EntityManager em = getEntityManager();
         
-        List<FlightDTO> flightDTOs = new ArrayList<FlightDTO>();
+        List<PersonDTO> flightDTOs = new ArrayList<PersonDTO>();
         try{
         
             
             System.out.println("Printer den formaterede Date ude her: " + departureDate);
             
-            TypedQuery<Flight> query = em.createQuery("SELECT f FROM Flights f WHERE f.departureAirportId.airportName = :departure AND f.arrivalAirportId.airportName = :arrival AND f.departureDate = :date", Flight.class)
+            TypedQuery<Person> query = em.createQuery("SELECT f FROM Flights f WHERE f.departureAirportId.airportName = :departure AND f.arrivalAirportId.airportName = :arrival AND f.departureDate = :date", Person.class)
                     .setParameter("departure", departure)
                     .setParameter("arrival", destination)
                     .setParameter("date", departureDate);
 
-            List<Flight> flights = query.getResultList();
+            List<Person> flights = query.getResultList();
             
             for (int i = 0; i < flights.size(); i++) {
-                flightDTOs.add(new FlightDTO(flights.get(i)));
+                flightDTOs.add(new PersonDTO(flights.get(i)));
                 
             }
             return flightDTOs;
         } catch (ParseException ex) {
-            Logger.getLogger(FlightFacade.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersonFacade.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             em.close();
         }
         return flightDTOs;
-    }
+    }*/
     
 }

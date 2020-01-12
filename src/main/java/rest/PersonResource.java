@@ -2,9 +2,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dtomappers.FlightDTO;
-import static entities.Flight_.departureDate;
-import facades.FlightFacade;
+import dtomappers.PersonDTO;
+import facades.PersonFacade;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -24,11 +23,11 @@ import utils.EMF_Creator;
 /**
  * @author lamseben
  */
-@Path("flights")
-public class FlightResource {
+@Path("persons")
+public class PersonResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
-        private static final FlightFacade FACADE =  FlightFacade.getFlightFacade(EMF);
+        private static final PersonFacade FACADE =  PersonFacade.getPersonFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Context
@@ -40,17 +39,18 @@ public class FlightResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoForAll() {
+        System.out.println("Getting to main api page");
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
     //Just to verify if the database is setup  
-
+/*
     @Path("search")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String flightSearch(String searchInput) {
-        FlightDTO f = GSON.fromJson(searchInput, FlightDTO.class);
+        PersonDTO f = GSON.fromJson(searchInput, PersonDTO.class);
         String departureAirport = f.getDepartureAirportName();
         String arrivalAirport = f.getArrivalAirportName();
         Date departureDate = f.getDepartureDate();
@@ -58,20 +58,21 @@ public class FlightResource {
         System.out.println(departureDate);
         System.out.println(f);
         
-        List<FlightDTO> flightResults = FACADE.getFlightBySearch(departureAirport, arrivalAirport, departureDate);
+        List<PersonDTO> flightResults = FACADE.getFlightBySearch(departureAirport, arrivalAirport, departureDate);
   
         String json = GSON.toJson(flightResults);
 
         return json;
-    }
+    }*/
     
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-   public String allFlights(){
+   public String allPersons(){
+        System.out.println("Getting to /all page");
        
-       List<FlightDTO> flightResults = FACADE.getAllFlights();
-       String json = GSON.toJson(flightResults);
+       List<PersonDTO> personResults = FACADE.getAllPersons();
+       String json = GSON.toJson(personResults);
 
        return json;
    }
