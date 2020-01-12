@@ -1,8 +1,8 @@
 package facades;
 
-import entities.Hobby;
-import entities.Address;
-import entities.Person;
+import entities.Cargo;
+import entities.Truck;
+import entities.Delivery;
 import utils.EMF_Creator;
 import entities.RenameMe;
 import java.text.ParseException;
@@ -23,14 +23,14 @@ import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class PersonFacadeTest {
+public class DeliveryFacadeTest {
     
     
 
     private static EntityManagerFactory emf;
-    private static PersonFacade facade;
+    private static DeliveryFacade facade;
 
-    public PersonFacadeTest() {
+    public DeliveryFacadeTest() {
     }
 
     //@BeforeAll
@@ -41,7 +41,7 @@ public class PersonFacadeTest {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.DROP_AND_CREATE);
-        facade = PersonFacade.getPersonFacade(emf);
+        facade = DeliveryFacade.getDeliveryFacade(emf);
     }
 
     /*   **** HINT **** 
@@ -53,7 +53,7 @@ public class PersonFacadeTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = PersonFacade.getPersonFacade(emf);
+       facade = DeliveryFacade.getDeliveryFacade(emf);
     }
 
     @AfterAll

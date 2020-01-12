@@ -5,8 +5,8 @@
  */
 package facades;
 
-import dtomappers.PersonDTO;
-import entities.Person;
+import dtomappers.DeliveryDTO;
+import entities.Delivery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,13 +19,13 @@ import javax.persistence.TypedQuery;
  *
  * @author jelle
  */
-public class PersonFacade implements IPersonFacade {
+public class DeliveryFacade implements IDeliveryFacade {
     
-    private static PersonFacade instance;
+    private static DeliveryFacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private PersonFacade() {}
+    private DeliveryFacade() {}
     
      private EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -37,30 +37,30 @@ public class PersonFacade implements IPersonFacade {
      * @param _emf
      * @return an instance of this facade class.
      */
-         public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
+         public static DeliveryFacade getDeliveryFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new PersonFacade();
+            instance = new DeliveryFacade();
         }
         return instance;
     }
      
     @Override
-    public List<PersonDTO> getAllPersons(){
+    public List<DeliveryDTO> getAllDeliveries(){
         EntityManager em = getEntityManager();
-        List<PersonDTO> personDTOs = new ArrayList<PersonDTO>();
+        List<DeliveryDTO> deliveryDTOs = new ArrayList<DeliveryDTO>();
         try{
         
-            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+            TypedQuery<Delivery> query = em.createQuery("SELECT d FROM Delivery d", Delivery.class);
 
-            List<Person> persons = query.getResultList();
+            List<Delivery> deliveries = query.getResultList();
             
-            for (int i = 0; i < persons.size(); i++) {
-                personDTOs.add(new PersonDTO(persons.get(i)));
+            for (int i = 0; i < deliveries.size(); i++) {
+                deliveryDTOs.add(new DeliveryDTO(deliveries.get(i)));
                 
             }
             
-            return personDTOs;
+            return deliveryDTOs;
         }finally{
             em.close();
         }
@@ -76,7 +76,7 @@ public class PersonFacade implements IPersonFacade {
             
             System.out.println("Printer den formaterede Date ude her: " + departureDate);
             
-            TypedQuery<Person> query = em.createQuery("SELECT f FROM Flights f WHERE f.departureAirportId.airportName = :departure AND f.arrivalAirportId.airportName = :arrival AND f.departureDate = :date", Person.class)
+            TypedQuery<Person> query = em.createQuery("SELECT f FROM Flights f WHERE f.departureAirportId.airportName = :departure AND f.arrivalAirportId.airportName = :arrival AND f.departureDate = :date", Delivery.class)
                     .setParameter("departure", departure)
                     .setParameter("arrival", destination)
                     .setParameter("date", departureDate);
@@ -84,12 +84,12 @@ public class PersonFacade implements IPersonFacade {
             List<Person> flights = query.getResultList();
             
             for (int i = 0; i < flights.size(); i++) {
-                flightDTOs.add(new PersonDTO(flights.get(i)));
+                flightDTOs.add(new DeliveryDTO(flights.get(i)));
                 
             }
             return flightDTOs;
         } catch (ParseException ex) {
-            Logger.getLogger(PersonFacade.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeliveryFacade.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             em.close();
         }

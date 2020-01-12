@@ -28,38 +28,36 @@ import javax.validation.constraints.NotNull;
  */
 
 
-@Entity(name = "Hobby")
+@Entity(name = "Cargo")
 
 @NamedQueries({
-@NamedQuery(name = "Hobby.deleteAllRows", query = "DELETE from Hobby"),
-@NamedQuery(name = "Hobby.getAllRows", query = "SELECT h from Hobby h")})
+@NamedQuery(name = "Cargo.deleteAllRows", query = "DELETE from Cargo"),
+@NamedQuery(name = "Cargo.getAllRows", query = "SELECT c from Cargo c")})
 
-@Table(name = "Hobby")
-public class Hobby implements Serializable {
+@Table(name = "Cargo")
+public class Cargo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @ManyToMany(mappedBy="hobbiesId", cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "person")
-    private List<Person> person;
     @Column(name = "name")
     private String name;
-    @Column(name = "description")
-    private String description;
+    @Column(name = "weight")
+    private String weight;
+    @Column(name = "units")
+    private String units;
 
-    public Hobby() {
+    public Cargo() {
     }
 
-    public Hobby(String name, String description) {
+    public Cargo(String name, String weight, String units) {
         this.name = name;
-        this.description = description;
+        this.weight = weight;
+        this.units = units;
     }
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -76,12 +74,20 @@ public class Hobby implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getWeight() {
+        return weight;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getUnits() {
+        return units;
+    }
+
+    public void setUnits(String units) {
+        this.units = units;
     }
 
     

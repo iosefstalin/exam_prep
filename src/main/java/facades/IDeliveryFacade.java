@@ -5,15 +5,17 @@
  */
 package facades;
 
-
-import dtomappers.HobbyDTO;
+import dtomappers.DeliveryDTO;
 import java.util.List;
 
 /**
  *
  * @author jelle
  */
-public interface IHobbyFacade {
-    public List<HobbyDTO> getAllHobbies();
+public interface IDeliveryFacade {
+    
+    public List<DeliveryDTO> getAllDeliveries();
+    
+   // public List<PersonDTO> getPersonByPhone(String phone);
     
 }

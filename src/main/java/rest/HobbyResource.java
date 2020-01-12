@@ -7,8 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dtomappers.HobbyDTO;
-import facades.HobbyFacade;
+import dtomappers.TruckDTO;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
@@ -24,7 +23,7 @@ import utils.EMF_Creator;
  * @author jelle
  */
 
-
+/*
 @Path("hobbies")
 public class HobbyResource {
 
@@ -51,11 +50,11 @@ public class HobbyResource {
    public String allHobbies(){
         System.out.println("Getting to /all page");
        
-       List<HobbyDTO> hobbyResults = FACADE.getAllHobbies();
+       List<TruckDTO> hobbyResults = FACADE.getAllHobbies();
        String json = GSON.toJson(hobbyResults);
 
        return json;
    }
 }
-
+*/
 

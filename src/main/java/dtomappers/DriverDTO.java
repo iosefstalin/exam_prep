@@ -3,19 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package facades;
+package dtomappers;
 
-import dtomappers.PersonDTO;
+import entities.Driver;
 import java.util.List;
 
 /**
  *
  * @author jelle
  */
-public interface IPersonFacade {
+public class DriverDTO {
     
-    public List<PersonDTO> getAllPersons();
-    
-   // public List<PersonDTO> getPersonByPhone(String phone);
+     private String name;
+
+    public DriverDTO() {
+    }
+
+    public DriverDTO(Driver driver) {
+        this.name = driver.getName();
+
+    }
     
 }

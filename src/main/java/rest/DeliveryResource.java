@@ -2,8 +2,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dtomappers.PersonDTO;
-import facades.PersonFacade;
+import dtomappers.DeliveryDTO;
+import facades.DeliveryFacade;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -23,11 +23,11 @@ import utils.EMF_Creator;
 /**
  * @author lamseben
  */
-@Path("persons")
-public class PersonResource {
+@Path("deliveries")
+public class DeliveryResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
-        private static final PersonFacade FACADE =  PersonFacade.getPersonFacade(EMF);
+        private static final DeliveryFacade FACADE =  DeliveryFacade.getDeliveryFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Context
@@ -50,7 +50,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String flightSearch(String searchInput) {
-        PersonDTO f = GSON.fromJson(searchInput, PersonDTO.class);
+        DeliveryDTO f = GSON.fromJson(searchInput, DeliveryDTO.class);
         String departureAirport = f.getDepartureAirportName();
         String arrivalAirport = f.getArrivalAirportName();
         Date departureDate = f.getDepartureDate();
@@ -71,7 +71,7 @@ public class PersonResource {
    public String allPersons(){
         System.out.println("Getting to /all page");
        
-       List<PersonDTO> personResults = FACADE.getAllPersons();
+       List<DeliveryDTO> personResults = FACADE.getAllDeliveries();
        String json = GSON.toJson(personResults);
 
        return json;
