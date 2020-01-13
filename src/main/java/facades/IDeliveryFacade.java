@@ -19,5 +19,6 @@ public interface IDeliveryFacade {
     public List<DeliveryDTO> getAllDeliveries();
     public List<TruckDTO> getTrucksBySearch(Long truckId);
     public List<TruckDTO> getAllTrucks();
+    public List<TruckDTO> getTrucksByDate(Date date);
     
 }

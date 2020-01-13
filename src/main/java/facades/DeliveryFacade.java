@@ -121,6 +121,32 @@ public class DeliveryFacade implements IDeliveryFacade {
         
     }
 
+    @Override
+    public List<TruckDTO> getTrucksByDate(Date date) {
+       EntityManager em = getEntityManager();
+        
+        List<TruckDTO> truckDTOs = new ArrayList<TruckDTO>();
+        try{
+        
+            
+            System.out.println("Printer søge kriterier ud her: " + date);
+            
+            TypedQuery<Truck> query = em.createQuery("SELECT t.truck FROM Delivery t WHERE t.date != :date", Truck.class)
+                    .setParameter("date", date);
+                    
+
+            List<Truck> trucks = query.getResultList();
+            
+            for (int i = 0; i < trucks.size(); i++) {
+                truckDTOs.add(new TruckDTO(trucks.get(i)));
+                
+            }
+            return truckDTOs;
+        }finally{
+            em.close();
+        }
+    }
+
 
     
 }

@@ -48,7 +48,6 @@ public class DeliveryResource {
     
     @Path("all")
     @GET
-    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
      public String allDeliveries(){
         System.out.println("Getting to /all page");

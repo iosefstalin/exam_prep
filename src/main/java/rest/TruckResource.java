@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtomappers.TruckDTO;
 import facades.DeliveryFacade;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
@@ -48,7 +49,6 @@ public class TruckResource {
     
     @Path("search/{truckId}")
     @GET
-    @RolesAllowed("user")
     @Produces({MediaType.APPLICATION_JSON})
     public String getTrucksBySearch(@PathParam("truckId") long truckId) {
 
@@ -57,6 +57,18 @@ public class TruckResource {
         String json = GSON.toJson(truckResults);
         
         return json;
+    }
+    
+    @GET
+    @Path("searchAvailableTrucks/{date}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getBookedTrucks(@PathParam("date") Date date){
+        
+    List<TruckDTO> truckResults = FACADE.getTrucksByDate(date);
+        String json = GSON.toJson(truckResults);
+        
+        return json;
+        
     }
     
     @Path("all")
