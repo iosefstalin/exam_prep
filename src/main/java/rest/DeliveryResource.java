@@ -17,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
@@ -49,16 +50,28 @@ public class DeliveryResource {
     @Path("trucks")
     @GET
      @Produces(MediaType.APPLICATION_JSON)
-   public String allTrucks(){
+    public String allTrucks(){
         System.out.println("Getting to /all page");
        
-       List<TruckDTO> personResults = FACADE.getAllTrucks();
-       String json = GSON.toJson(personResults);
+       List<TruckDTO> truckResults = FACADE.getAllTrucks();
+       String json = GSON.toJson(truckResults);
 
        return json;
    }
+    
+    @Path("search/{truckId}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getTrucksBySearch(@PathParam("truckId") long truckId) {
+
+        
+        List<TruckDTO> truckResults = FACADE.getTrucksBySearch(truckId);
+        String json = GSON.toJson(truckResults);
+        
+        return json;
+    }
    
-    @Path("search")
+    /*@Path("search")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -74,12 +87,12 @@ public class DeliveryResource {
         String json = GSON.toJson(truckResults);
 
         return json;
-    }
+    }*/
     
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-   public String allPersons(){
+     public String allPersons(){
         System.out.println("Getting to /all page");
        
        List<DeliveryDTO> personResults = FACADE.getAllDeliveries();
