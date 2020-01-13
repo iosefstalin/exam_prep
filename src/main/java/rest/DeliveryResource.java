@@ -45,45 +45,16 @@ public class DeliveryResource {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
-    /*
-    @Path("search/{truckId}")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getTrucksBySearch(@PathParam("truckId") long truckId) {
-
-        
-        List<TruckDTO> truckResults = FACADE.getTrucksBySearch(truckId);
-        String json = GSON.toJson(truckResults);
-        
-        return json;
-    }*/
-   
-    /*@Path("search")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String flightSearch(String searchInput) {
-        TruckDTO t = GSON.fromJson(searchInput, TruckDTO.class);
-        Long truckId = t.getTruckId();
-        
-        System.out.println(truckId);
-        System.out.println(t);
-        
-        List<TruckDTO> truckResults = FACADE.getTrucksBySearch(truckId);
-  
-        String json = GSON.toJson(truckResults);
-
-        return json;
-    }*/
     
     @Path("all")
     @GET
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
-     public String allPersons(){
+     public String allDeliveries(){
         System.out.println("Getting to /all page");
        
-       List<DeliveryDTO> personResults = FACADE.getAllDeliveries();
-       String json = GSON.toJson(personResults);
+       List<DeliveryDTO> deliveryResults = FACADE.getAllDeliveries();
+       String json = GSON.toJson(deliveryResults);
 
        return json;
    }

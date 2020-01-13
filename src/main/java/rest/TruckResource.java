@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import dtomappers.TruckDTO;
 import facades.DeliveryFacade;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -59,6 +60,7 @@ public class TruckResource {
     
     @Path("all")
     @GET
+    @RolesAllowed({"user", "admin"})
      @Produces(MediaType.APPLICATION_JSON)
     public String allTrucks(){
         System.out.println("Getting to /alltrucks page");
