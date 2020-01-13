@@ -6,6 +6,8 @@
 package facades;
 
 import dtomappers.DeliveryDTO;
+import dtomappers.TruckDTO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +17,8 @@ import java.util.List;
 public interface IDeliveryFacade {
     
     public List<DeliveryDTO> getAllDeliveries();
+    public List<TruckDTO> getTrucksBySearch(Long truckId);
+    public List<TruckDTO> getAllTrucks();
     
    // public List<PersonDTO> getPersonByPhone(String phone);
     

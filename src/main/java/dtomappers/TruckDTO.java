@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class TruckDTO {
     
+    private Long truckId;
     private String name;
     private String capacity;
     private List<DriverDTO> drivers = new ArrayList<>();
@@ -24,6 +25,7 @@ public class TruckDTO {
     }
 
     public TruckDTO(Truck truck) {
+        this.truckId = truck.getId();
         this.name = truck.getName();
         this.capacity = truck.getCapacity();
         
@@ -33,7 +35,14 @@ public class TruckDTO {
         }
     }
 
+    public TruckDTO(Long truckId) {
+        this.truckId = truckId;
+    }
+    
 
+
+    
+    
     public String getName() {
         return name;
     }
@@ -56,6 +65,14 @@ public class TruckDTO {
 
     public void setDrivers(List<DriverDTO> drivers) {
         this.drivers = drivers;
+    }
+
+    public Long getTruckId() {
+        return truckId;
+    }
+
+    public void setTruckId(Long truckId) {
+        this.truckId = truckId;
     }
 
 

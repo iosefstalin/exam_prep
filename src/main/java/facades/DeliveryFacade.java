@@ -6,8 +6,11 @@
 package facades;
 
 import dtomappers.DeliveryDTO;
+import dtomappers.TruckDTO;
 import entities.Delivery;
+import entities.Truck;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,35 +68,59 @@ public class DeliveryFacade implements IDeliveryFacade {
             em.close();
         }
     }
-     /*
+     
     @Override
-    public List<PersonDTO> getFlightBySearch(String departure, String destination, Date departureDate) {
+    public List<TruckDTO> getTrucksBySearch(Long truckId) {
         EntityManager em = getEntityManager();
         
-        List<PersonDTO> flightDTOs = new ArrayList<PersonDTO>();
+        List<TruckDTO> truckDTOs = new ArrayList<TruckDTO>();
         try{
         
             
-            System.out.println("Printer den formaterede Date ude her: " + departureDate);
+            System.out.println("Printer søge kriterier ud her: " + truckId);
             
-            TypedQuery<Person> query = em.createQuery("SELECT f FROM Flights f WHERE f.departureAirportId.airportName = :departure AND f.arrivalAirportId.airportName = :arrival AND f.departureDate = :date", Delivery.class)
-                    .setParameter("departure", departure)
-                    .setParameter("arrival", destination)
-                    .setParameter("date", departureDate);
+            TypedQuery<Truck> query = em.createQuery("SELECT t FROM Truck t WHERE t.id = :truckId", Truck.class)
+                    .setParameter("truckId", truckId);
+                    
 
-            List<Person> flights = query.getResultList();
+            List<Truck> trucks = query.getResultList();
             
-            for (int i = 0; i < flights.size(); i++) {
-                flightDTOs.add(new DeliveryDTO(flights.get(i)));
+            for (int i = 0; i < trucks.size(); i++) {
+                truckDTOs.add(new TruckDTO(trucks.get(i)));
                 
             }
-            return flightDTOs;
-        } catch (ParseException ex) {
-            Logger.getLogger(DeliveryFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return truckDTOs;
         }finally{
             em.close();
         }
-        return flightDTOs;
-    }*/
+    }
+
+    @Override
+    public List<TruckDTO> getAllTrucks() {
+        EntityManager em = getEntityManager();
+        
+        List<TruckDTO> truckDTOs = new ArrayList<TruckDTO>();
+        try{
+        
+            
+            
+            
+            TypedQuery<Truck> query = em.createQuery("SELECT t FROM Truck t", Truck.class);
+                    
+
+            List<Truck> trucks = query.getResultList();
+            
+            for (int i = 0; i < trucks.size(); i++) {
+                truckDTOs.add(new TruckDTO(trucks.get(i)));
+                
+            }
+            return truckDTOs;
+        }finally{
+            em.close();
+        }
+        
+    }
+
+
     
 }

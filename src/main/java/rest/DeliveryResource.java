@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtomappers.DeliveryDTO;
+import dtomappers.TruckDTO;
 import facades.DeliveryFacade;
 import java.util.Date;
 import java.util.List;
@@ -44,26 +45,36 @@ public class DeliveryResource {
     }
 
     //Just to verify if the database is setup  
-/*
+
+    @Path("trucks")
+    @GET
+     @Produces(MediaType.APPLICATION_JSON)
+   public String allTrucks(){
+        System.out.println("Getting to /all page");
+       
+       List<TruckDTO> personResults = FACADE.getAllTrucks();
+       String json = GSON.toJson(personResults);
+
+       return json;
+   }
+   
     @Path("search")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String flightSearch(String searchInput) {
-        DeliveryDTO f = GSON.fromJson(searchInput, DeliveryDTO.class);
-        String departureAirport = f.getDepartureAirportName();
-        String arrivalAirport = f.getArrivalAirportName();
-        Date departureDate = f.getDepartureDate();
+        TruckDTO t = GSON.fromJson(searchInput, TruckDTO.class);
+        Long truckId = t.getTruckId();
         
-        System.out.println(departureDate);
-        System.out.println(f);
+        System.out.println(truckId);
+        System.out.println(t);
         
-        List<PersonDTO> flightResults = FACADE.getFlightBySearch(departureAirport, arrivalAirport, departureDate);
+        List<TruckDTO> truckResults = FACADE.getTrucksBySearch(truckId);
   
-        String json = GSON.toJson(flightResults);
+        String json = GSON.toJson(truckResults);
 
         return json;
-    }*/
+    }
     
     @Path("all")
     @GET
