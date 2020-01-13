@@ -20,6 +20,4 @@ public interface IDeliveryFacade {
     public List<TruckDTO> getTrucksBySearch(Long truckId);
     public List<TruckDTO> getAllTrucks();
     
-   // public List<PersonDTO> getPersonByPhone(String phone);
-    
 }

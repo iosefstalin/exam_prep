@@ -8,6 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtomappers.TruckDTO;
+import facades.DeliveryFacade;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
@@ -23,12 +24,12 @@ import utils.EMF_Creator;
  * @author jelle
  */
 
-/*
-@Path("hobbies")
-public class HobbyResource {
+
+@Path("trucks")
+public class TruckResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
-        private static final HobbyFacade FACADE = HobbyFacade.getHobbyFacade(EMF);
+    private static final DeliveryFacade FACADE =  DeliveryFacade.getDeliveryFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Context
@@ -46,15 +47,15 @@ public class HobbyResource {
     
     @Path("all")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-   public String allHobbies(){
+     @Produces(MediaType.APPLICATION_JSON)
+    public String allTrucks(){
         System.out.println("Getting to /all page");
        
-       List<TruckDTO> hobbyResults = FACADE.getAllHobbies();
-       String json = GSON.toJson(hobbyResults);
+       List<TruckDTO> truckResults = FACADE.getAllTrucks();
+       String json = GSON.toJson(truckResults);
 
        return json;
    }
 }
-*/
+
 
