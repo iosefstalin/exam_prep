@@ -48,7 +48,7 @@ public class TruckResource {
     @GET
      @Produces(MediaType.APPLICATION_JSON)
     public String allTrucks(){
-        System.out.println("Getting to /all page");
+        System.out.println("Getting to /alltrucks page");
        
        List<TruckDTO> truckResults = FACADE.getAllTrucks();
        String json = GSON.toJson(truckResults);
