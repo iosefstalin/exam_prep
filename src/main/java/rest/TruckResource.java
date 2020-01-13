@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -56,6 +57,18 @@ public class TruckResource {
 
        return json;
    }
+    
+    @Path("search/{truckId}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getTrucksBySearch(@PathParam("truckId") long truckId) {
+
+        
+        List<TruckDTO> truckResults = FACADE.getTrucksBySearch(truckId);
+        String json = GSON.toJson(truckResults);
+        
+        return json;
+    }
 }
 
 
