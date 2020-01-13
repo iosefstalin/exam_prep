@@ -48,6 +48,7 @@ public class TruckResource {
     
     @Path("search/{truckId}")
     @GET
+    @RolesAllowed("user")
     @Produces({MediaType.APPLICATION_JSON})
     public String getTrucksBySearch(@PathParam("truckId") long truckId) {
 
@@ -60,7 +61,6 @@ public class TruckResource {
     
     @Path("all")
     @GET
-    @RolesAllowed({"user", "admin"})
      @Produces(MediaType.APPLICATION_JSON)
     public String allTrucks(){
         System.out.println("Getting to /alltrucks page");
