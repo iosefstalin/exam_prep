@@ -45,19 +45,6 @@ public class DeliveryResource {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
-    //Just to verify if the database is setup  
-
-    @Path("trucks")
-    @GET
-     @Produces(MediaType.APPLICATION_JSON)
-    public String allTrucks(){
-        System.out.println("Getting to /all page");
-       
-       List<TruckDTO> truckResults = FACADE.getAllTrucks();
-       String json = GSON.toJson(truckResults);
-
-       return json;
-   }
     
     @Path("search/{truckId}")
     @GET
