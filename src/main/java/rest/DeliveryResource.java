@@ -45,7 +45,7 @@ public class DeliveryResource {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
-    
+    /*
     @Path("search/{truckId}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -56,7 +56,7 @@ public class DeliveryResource {
         String json = GSON.toJson(truckResults);
         
         return json;
-    }
+    }*/
    
     /*@Path("search")
     @POST
