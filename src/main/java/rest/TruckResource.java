@@ -57,7 +57,7 @@ public class TruckResource {
 
        return json;
    }
-    
+    /*
     @Path("search/{truckId}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -68,7 +68,7 @@ public class TruckResource {
         String json = GSON.toJson(truckResults);
         
         return json;
-    }
+    }*/
 }
 
 
